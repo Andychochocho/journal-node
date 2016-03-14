@@ -1,6 +1,22 @@
 var journal = require('./journal.js').journal;
 var prompt = require('prompt');
+var moment = require('moment');
 prompt.start();
+
+prompt.get(['title', 'body'], function(err, result){
+  var result = journal(result.[title, body]);
+  var inputTitle = result.title;
+  var inputBody = result.body;
+  var now = moment();
+  var newJournal = new Journal(inputTitle, inputBody, now);
+
+  console.log(newJournal.title);
+  console.log(newJournal.body);
+  console.log(newJournal.date.format(MMM Do YY));
+  console.log(newJournal.wordCount());
+});
+
+
 
 // prompt.get('title', function(err, result) {
 //   var result = journal(result.title);
@@ -14,9 +30,3 @@ prompt.start();
 //     console.log(element);
 //   });
 // });
-
-var titleGoal = prompt.get("Enter your title");
-var titleResult = new journal("titleGoal", "body");
-// var bodyGoal = prompt.get("Enter your body")
-// var bodyResult = new journal(bodyResult);
-console.log(titleResult);
